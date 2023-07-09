@@ -1,9 +1,18 @@
 package com.example.pe_prm392.Models;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity
 public class Country {
+    @PrimaryKey(autoGenerate = false)
     private String name;
+    @ColumnInfo(name = "rank")
     private int rank;
+    @ColumnInfo(name = "gdppc")
     private long gdppc;
+    @ColumnInfo(name = "yeả")
     private String year;
 
     public Country() {
