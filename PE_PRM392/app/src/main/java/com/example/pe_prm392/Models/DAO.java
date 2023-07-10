@@ -9,6 +9,8 @@ import androidx.room.Update;
 
 import java.util.List;
 
+import kotlin.text.UStringsKt;
+
 @Dao
 public interface DAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -25,4 +27,19 @@ public interface DAO {
 
     @Delete
     void delete(Country country);
+
+    @Query("Select * from Country where name = :name")
+    Country getCountryByName(String name);
+
+    @Query("Select * from Country where name LIKE '%' || :name || '%' AND year LIKE '%' || :year || '%' AND rank = :rank AND gdppc = :gdppc")
+    List<Country> searchCountry(String name, String year, int rank, long gdppc);
+
+    @Query("Select * from Country where name LIKE '%' || :name || '%' AND year LIKE '%' || :year || '%'")
+    List<Country> searchCountry1(String name, String year);
+
+    @Query("Select * from Country where name LIKE '%' || :name || '%' AND year LIKE '%' || :year || '%' AND gdppc = :gdppc")
+    List<Country> searchCountry2(String name, String year, long gdppc);
+
+    @Query("Select * from Country where name LIKE '%' || :name || '%' AND year LIKE '%' || :year || '%' AND rank = :rank ")
+    List<Country> searchCountry3(String name, String year, int rank);
 }
